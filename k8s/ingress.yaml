@@ -4,16 +4,13 @@ metadata:
   name: tictactoe-ingress
   namespace: tictactoe
   annotations:
-    # NGINX annotations to support WebSocket and long-lived connections
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-buffering: "off"
-    nginx.ingress.kubernetes.io/upstream-vhost: "$host"
 spec:
   ingressClassName: nginx
   rules:
-    - host: tictactoe.example.com
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix
