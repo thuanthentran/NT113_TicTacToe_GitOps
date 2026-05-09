@@ -21,6 +21,21 @@ spec:
           image: ghcr.io/thuanthentran/nt113_tictactoe_gitops:bf26bc19d69d09c6448bb47ec8e89bd68b5f542f
           ports:
             - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+            successThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            failureThreshold: 3
           resources:
             requests:
               cpu: 100m
