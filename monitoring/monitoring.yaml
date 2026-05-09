@@ -1,0 +1,56 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: kube-prometheus-stack
+    targetRevision: 69.3.1
+    helm:
+      values: |
+
+        prometheus:
+          prometheusSpec:
+            # Ép Prometheus dùng RAM/Disk cực ít, chỉ lưu data trong 1 tiếng
+            retention: 1h
+            retentionSize: "1GB"
+            # Đã gỡ bỏ khối volumeClaimTemplate
+          service:
+            type: NodePort
+
+        grafana:
+          initChownData:
+            enabled: false
+          
+          podSecurityContext:
+            fsGroup: 472
+            runAsGroup: 472
+            runAsUser: 472
+
+          persistence:
+            enabled: false # TẮT PVC Ở ĐÂY
+
+          service:
+            type: NodePort
+
+        # Tắt luôn Alertmanager nếu chỉ cần xem biểu đồ và trích xuất metric cho RL
+        alertmanager:
+          enabled: false 
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - SkipDryRunOnMissingResource=true
