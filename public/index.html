@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Caro Matchmaking Server</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb bg-orb-a"></div>
+    <div class="bg-orb bg-orb-b"></div>
+
+    <main class="shell">
+      <section class="hero card">
+        <div>
+          <p class="eyebrow">Esport arena server</p>
+          <h1>Caro simple, ghép cặp tự động</h1>
+          <p class="lead">
+            Nguoi dau tien bam san sang se vao hang cho. Nguoi thu hai vao sau se duoc ghep ngay.
+            Nguoi thu ba se doi nguoi thu tu.
+          </p>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <span id="connectionState" class="status-pill">Dang ket noi</span>
+            <strong id="matchState">Idle</strong>
+          </div>
+          <div>
+            <span>Hang cho</span>
+            <strong id="queueState">0 nguoi</strong>
+          </div>
+          <div>
+            <span>Luot choi</span>
+            <strong id="turnState">-</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="layout">
+        <div class="card controls">
+          <label class="field">
+            <span>Ten nguoi choi</span>
+            <input id="playerName" type="text" maxlength="24" placeholder="Player 1" />
+          </label>
+          <div class="button-row">
+            <button id="readyButton" class="primary">San sang</button>
+            <button id="resetNameButton" class="ghost">Cap nhat ten</button>
+          </div>
+          <p id="detailText" class="detail">Dang cho ket noi toi server...</p>
+          <div class="legend">
+            <span><i class="dot x"></i>X - di truoc</span>
+            <span><i class="dot o"></i>O - di sau</span>
+            <span><i class="dot turn"></i>Duoc phep ban</span>
+          </div>
+        </div>
+
+        <div class="card board-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Ban co</p>
+              <h2>Caro 15x15</h2>
+            </div>
+            <div id="matchBadge" class="badge">Chua vao tran</div>
+          </div>
+          <div id="board" class="board" aria-label="Bang caro"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/client.js"></script>
+  </body>
+</html>

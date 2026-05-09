@@ -1,0 +1,16 @@
+{
+  "name": "tictactoe-matchmaking-server",
+  "version": "1.0.0",
+  "description": "Simple caro matchmaking web server with WebSocket game rooms",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
