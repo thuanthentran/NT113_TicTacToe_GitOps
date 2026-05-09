@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tictactoe-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    # Replace the repoURL below with your repo (this repo) or leave as-is if ArgoCD has access to this repository
+    repoURL: 'https://github.com/thuanthentran/NT113_TicTacToe_GitOps'
+    path: k8s
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: tictactoe
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
